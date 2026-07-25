@@ -1,8 +1,9 @@
 // @ts-ignore
 import { readFile } from 'node:fs/promises'
 
-import type { Draw } from '../../domain/engines/draws/Draw'
 import type { DrawRepository } from './DrawRepository'
+
+import { parseRow } from './parseRow'
 
 export type CsvDrawRepositoryOptions = Readonly<{
   filePath: string
@@ -15,7 +16,9 @@ export function createCsvDrawRepository(
     async findAll() {
       const csv = await readFile(options.filePath, 'utf8')
 
-      const rows = getRows(csv)
+      const rows = csv
+        .trim()
+        .split(/\r?\n/)
 
       return rows
         .slice(1)
@@ -30,14 +33,4 @@ export function createCsvDrawRepository(
       throw new Error('Not implemented')
     }
   }
-}
-
-function getRows(csv: string): readonly string[] {
-  return csv
-    .trim()
-    .split(/\r?\n/)
-}
-
-function parseRow(_row: string): Draw {
-  throw new Error('Not implemented')
 }
