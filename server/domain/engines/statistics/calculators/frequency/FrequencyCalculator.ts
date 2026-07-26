@@ -1,5 +1,5 @@
-import type { Draw } from '../../../../models/Draw'
-import { increaseCounter } from '../../../../shared/increaseCounter'
+import type { Draw } from '@server/domain/models/Draw'
+import { increaseCounter } from '@server/domain/shared/increaseCounter'
 
 export function calculateFrequency(
   draws: readonly Draw[]

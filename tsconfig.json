@@ -5,6 +5,12 @@
     "strict": true,
     "noImplicitAny": true,
     "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true
+    "exactOptionalPropertyTypes": true,
+    "paths": {
+      "@server/*": ["./server/*"],
+      "@db/*": ["./db/*"],
+      "@features/*": ["./app/features/*"],
+      "@test/*": ["./server/test/*"]
+    }
   }
 }

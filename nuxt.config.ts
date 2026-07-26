@@ -17,6 +17,6 @@ export default defineNuxtConfig({
     '@server': resolve(__dirname, 'server'),
     '@db': resolve(__dirname, 'db'),
     '@features': resolve(__dirname, 'app/features'),
-    '@shared': resolve(__dirname, 'app/shared')
+    '@test': resolve(__dirname, 'server/test')
   }
 })

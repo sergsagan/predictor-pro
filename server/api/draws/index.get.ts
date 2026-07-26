@@ -1,4 +1,4 @@
-import { createCsvDrawRepository } from '../../domain/repositories/draws/CsvDrawRepository'
+import { createCsvDrawRepository } from '@server/domain/repositories/draws/CsvDrawRepository'
 
 
 export default defineEventHandler(async () => {

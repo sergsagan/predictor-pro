@@ -1,4 +1,4 @@
-import type { Draw } from '../../models/Draw'
+import type { Draw } from '@server/domain/models/Draw'
 
 
 export type DrawRepository = Readonly<{

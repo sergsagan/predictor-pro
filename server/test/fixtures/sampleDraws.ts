@@ -1,4 +1,4 @@
-import type { Draw } from '../../domain/models/Draw'
+import type { Draw } from '@server/domain/models/Draw'
 
 export const sampleDraws: readonly Draw[] = [
   {
