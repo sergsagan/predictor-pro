@@ -1,4 +1,3 @@
-// @ts-ignore
 import { readFile } from 'node:fs/promises'
 
 import type { DrawRepository } from './DrawRepository'
@@ -16,13 +15,9 @@ export function createCsvDrawRepository(
     async findAll() {
       const csv = await readFile(options.filePath, 'utf8')
 
-      const rows = csv
-        .trim()
-        .split(/\r?\n/)
+      const rows = csv.trim().split(/\r?\n/)
 
-      return rows
-        .slice(1)
-        .map(parseRow)
+      return rows.slice(1).map(parseRow)
     },
 
     async findLatest() {
