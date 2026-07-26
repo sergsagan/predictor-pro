@@ -1,6 +1,6 @@
 import type { Draw } from '@server/domain/engines/draws/Draw.ts'
 
-import { parseNumber } from '../../domain/parsers/parseNumber'
+import { parseNumber } from '../../parsers/parseNumber'
 
 export function parseRow(row: string): Draw {
   const columns = row.split(',')
