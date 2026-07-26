@@ -1,4 +1,5 @@
-import type { Draw } from '../../engines/draws/Draw'
+import type { Draw } from '../../models/Draw'
+
 
 export type DrawRepository = Readonly<{
   findAll(): Promise<readonly Draw[]>
