@@ -13,7 +13,7 @@ describe('DefaultStatisticsService', () => {
     // Arrange
     const expectedStatistics: StatisticsResult = {
       frequency: new Map([[17, 3]]),
-      gap: new Map([[17, 0]])
+      lastSeen: new Map([[17, 0]])
     }
 
     const repository: DrawRepository = {

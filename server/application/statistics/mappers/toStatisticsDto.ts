@@ -9,6 +9,6 @@ function toRecord(map: ReadonlyMap<number, number>): Record<number, number> {
 export function toStatisticsDto(statistics: StatisticsResult): StatisticsDto {
   return {
     frequency: toRecord(statistics.frequency),
-    gap: toRecord(statistics.gap)
+    lastSeen: toRecord(statistics.lastSeen)
   }
 }

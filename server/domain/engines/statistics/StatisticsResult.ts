@@ -1,7 +1,7 @@
 import type { Frequency } from './calculators/frequency/Frequency'
-import type { Gap } from './calculators/gap/Gap'
+import type { LastSeen } from './calculators/lastSeen/LastSeen'
 
 export interface StatisticsResult {
   frequency: Frequency
-  gap: Gap
+  lastSeen: LastSeen
 }
