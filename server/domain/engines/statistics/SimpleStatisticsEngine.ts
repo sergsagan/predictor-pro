@@ -6,6 +6,7 @@ import { calculateFrequency } from './calculators/frequency/FrequencyCalculator'
 import { calculateLastSeen } from './calculators/lastSeen/LastSeenCalculator'
 import { calculateGap } from './calculators/gap/GapCalculator'
 import { calculatePairFrequency } from './calculators/pairFrequency/PairFrequencyCalculator'
+import { calculateCurrentGap } from './calculators/currentGap/CurrentGapCalculator'
 
 export function createSimpleStatisticsEngine(): StatisticsEngine {
   return {
@@ -14,7 +15,8 @@ export function createSimpleStatisticsEngine(): StatisticsEngine {
         lastSeen: calculateLastSeen(draws),
         frequency: calculateFrequency(draws),
         gap: calculateGap(draws),
-        pairFrequency: calculatePairFrequency(draws)
+        pairFrequency: calculatePairFrequency(draws),
+        currentGap: calculateCurrentGap(draws)
       }
     }
   }

@@ -6,10 +6,12 @@ import { calculateLastSeen } from '@server/domain/engines/statistics/calculators
 import { calculatePairFrequency } from '@server/domain/engines/statistics/calculators/pairFrequency/PairFrequencyCalculator'
 
 import { sampleDraws } from './sampleDraws'
+import { calculateCurrentGap } from '@server/domain/engines/statistics/calculators/currentGap/CurrentGapCalculator'
 
 export const sampleStatisticsResult: StatisticsResult = {
   frequency: calculateFrequency(sampleDraws),
   lastSeen: calculateLastSeen(sampleDraws),
   gap: calculateGap(sampleDraws),
-  pairFrequency: calculatePairFrequency(sampleDraws)
+  pairFrequency: calculatePairFrequency(sampleDraws),
+  currentGap: calculateCurrentGap(sampleDraws)
 }
