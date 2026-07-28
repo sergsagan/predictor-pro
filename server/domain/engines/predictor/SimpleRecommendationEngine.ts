@@ -4,17 +4,25 @@ import type { StatisticsResult } from '@server/domain/engines/statistics/Statist
 
 export class SimpleRecommendationEngine implements RecommendationEngine {
   recommend(statistics: StatisticsResult): Recommendation {
-    const numbers = [...statistics.frequency.entries()]
+    const numbers = Array.from(statistics.frequency.keys())
       .sort((a, b) => {
-        if (a[1] !== b[1]) {
-          return b[1] - a[1]
+        const frequencyA = this.getFrequencyScore(a, statistics)
+        const frequencyB = this.getFrequencyScore(b, statistics)
+
+        if (frequencyA !== frequencyB) {
+          return frequencyB - frequencyA
         }
 
-        return a[0] - b[0]
+        return a - b
       })
       .slice(0, 5)
-      .map(([number]) => number)
-
     return { numbers }
+  }
+
+  private getFrequencyScore(
+    number: number,
+    statistics: StatisticsResult
+  ): number {
+    return statistics.frequency.get(number) ?? 0
   }
 }
