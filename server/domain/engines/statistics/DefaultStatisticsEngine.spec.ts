@@ -16,5 +16,12 @@ describe('DefaultStatisticsEngine', () => {
     expect(statistics.lastSeen.get(4)).toBe(0)
     expect(statistics.frequency.get(22)).toBe(1)
     expect(statistics.lastSeen.get(22)).toBe(2)
+
+    expect(statistics.pairFrequency.get('17-37')).toBe(3)
+    expect(statistics.pairFrequency.get('4-17')).toBe(1)
+    expect(statistics.pairFrequency.get('6-48')).toBe(1)
+    expect(statistics.pairFrequency.get('22-50')).toBe(1)
+
+    expect(statistics.pairFrequency.has('5-7')).toBe(false)
   })
 })

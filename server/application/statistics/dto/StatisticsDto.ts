@@ -12,4 +12,6 @@ export interface StatisticsDto {
   lastSeen: Record<number, number>
 
   gap: Record<number, GapStatisticsDto>
+
+  pairFrequency: Record<string, number>
 }
