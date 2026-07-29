@@ -22,7 +22,9 @@ describe('SimpleRecommendationEngine', () => {
 
     const recommendation = engine.recommend(sampleStatisticsResult)
 
-    expect(recommendation.numbers).toEqual([17, 37, 22, 41, 50])
+    expect(recommendation.numbers.map((number) => number.value)).toEqual([
+      17, 37, 22, 41, 50
+    ])
   })
 
   it('prefers higher current gap when frequency is equal', () => {
@@ -32,7 +34,9 @@ describe('SimpleRecommendationEngine', () => {
       sampleCurrentGapRecommendationStatisticsResult
     )
 
-    expect(recommendation.numbers.slice(0, 2)).toEqual([2, 1])
+    expect(
+      recommendation.numbers.slice(0, 2).map((number) => number.value)
+    ).toEqual([2, 1])
   })
 
   it('prefers lower number when frequency and current gap are equal', () => {
@@ -42,7 +46,9 @@ describe('SimpleRecommendationEngine', () => {
       sampleEqualRecommendationStatisticsResult
     )
 
-    expect(recommendation.numbers.slice(0, 2)).toEqual([1, 2])
+    expect(
+      recommendation.numbers.slice(0, 2).map((number) => number.value)
+    ).toEqual([1, 2])
   })
 
   it('prefers candidate with higher pair frequency when frequency and current gap are equal', () => {
@@ -52,7 +58,9 @@ describe('SimpleRecommendationEngine', () => {
       samplePairFrequencyRecommendationStatisticsResult
     )
 
-    expect(recommendation.numbers).toEqual([3, 4, 6, 5])
+    expect(recommendation.numbers.map((number) => number.value)).toEqual([
+      3, 4, 6, 5
+    ])
   })
 
   it('ignores pair frequency when no numbers have been selected', () => {
@@ -77,7 +85,7 @@ describe('SimpleRecommendationEngine', () => {
       gap: new Map()
     })
 
-    expect(recommendation.numbers).toEqual([5, 6])
+    expect(recommendation.numbers.map((number) => number.value)).toEqual([5, 6])
   })
 
   it('treats missing pair frequencies as zero', () => {
@@ -103,7 +111,9 @@ describe('SimpleRecommendationEngine', () => {
       gap: new Map()
     })
 
-    expect(recommendation.numbers).toEqual([3, 4, 6, 5])
+    expect(recommendation.numbers.map((number) => number.value)).toEqual([
+      3, 4, 6, 5
+    ])
   })
 
   it('uses sum of pair frequencies for all selected numbers', () => {
@@ -128,13 +138,13 @@ describe('SimpleRecommendationEngine', () => {
         [createPairKey(4, 5), 1],
 
         [createPairKey(3, 6), 2],
-        [createPairKey(4, 6), 0]
+        [createPairKey(4, 6), 1]
       ]),
 
       lastSeen: new Map(),
       gap: new Map()
     })
 
-    expect(recommendation.numbers).toEqual([3, 4, 5, 6])
+    expect(recommendation.numbers.map((n) => n.value)).toEqual([3, 4, 6, 5])
   })
 })

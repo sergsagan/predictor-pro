@@ -6,21 +6,36 @@ import { createPairKey } from '../statistics/calculators/pairFrequency/createPai
 export class SimpleRecommendationEngine implements RecommendationEngine {
   recommend(statistics: StatisticsResult): Recommendation {
     const availableNumbers = Array.from(statistics.frequency.keys())
-    const numbers: number[] = []
 
-    while (numbers.length < 5 && availableNumbers.length > 0) {
+    const selectedNumbers: number[] = []
+    const recommendationNumbers: Recommendation['numbers'] = []
+
+    while (recommendationNumbers.length < 5 && availableNumbers.length > 0) {
       availableNumbers.sort((a, b) =>
-        this.compareNumbers(a, b, statistics, numbers)
+        this.compareNumbers(a, b, statistics, selectedNumbers)
       )
 
       const best = availableNumbers.shift()
 
       if (best !== undefined) {
-        numbers.push(best)
+        recommendationNumbers.push({
+          value: best,
+          frequency: statistics.frequency.get(best) ?? 0,
+          currentGap: statistics.currentGap.get(best) ?? 0,
+          pairScore: this.getPairFrequencyScore(
+            best,
+            selectedNumbers,
+            statistics
+          )
+        })
+
+        selectedNumbers.push(best)
       }
     }
 
-    return { numbers }
+    return {
+      numbers: recommendationNumbers
+    }
   }
 
   private compareNumbers(
