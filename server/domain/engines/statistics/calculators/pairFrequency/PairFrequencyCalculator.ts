@@ -1,6 +1,7 @@
 import type { Draw } from '@server/domain/models/Draw'
 
 import type { PairFrequency } from './PairFrequency'
+import { createPairKey } from './createPairKey'
 
 export function calculatePairFrequency(draws: readonly Draw[]): PairFrequency {
   const frequency = new Map<string, number>()
@@ -18,11 +19,4 @@ export function calculatePairFrequency(draws: readonly Draw[]): PairFrequency {
   }
 
   return frequency
-}
-
-function createPairKey(first: number, second: number): string {
-  const smaller = Math.min(first, second)
-  const larger = Math.max(first, second)
-
-  return `${smaller}-${larger}`
 }
