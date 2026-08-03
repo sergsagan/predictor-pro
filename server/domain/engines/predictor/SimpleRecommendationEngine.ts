@@ -18,15 +18,20 @@ export class SimpleRecommendationEngine implements RecommendationEngine {
       const best = availableNumbers.shift()
 
       if (best !== undefined) {
+        const frequency = statistics.frequency.get(best) ?? 0
+        const currentGap = statistics.currentGap.get(best) ?? 0
+        const pairScore = this.getPairFrequencyScore(
+          best,
+          selectedNumbers,
+          statistics
+        )
+
         recommendationNumbers.push({
           value: best,
-          frequency: statistics.frequency.get(best) ?? 0,
-          currentGap: statistics.currentGap.get(best) ?? 0,
-          pairScore: this.getPairFrequencyScore(
-            best,
-            selectedNumbers,
-            statistics
-          )
+          frequency,
+          currentGap,
+          pairScore,
+          score: this.calculateScore(frequency, currentGap, pairScore)
         })
 
         selectedNumbers.push(best)
@@ -36,6 +41,14 @@ export class SimpleRecommendationEngine implements RecommendationEngine {
     return {
       numbers: recommendationNumbers
     }
+  }
+
+  private calculateScore(
+    frequency: number,
+    currentGap: number,
+    pairScore: number
+  ): number {
+    return frequency + currentGap + pairScore
   }
 
   private compareNumbers(

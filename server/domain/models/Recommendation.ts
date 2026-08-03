@@ -7,4 +7,5 @@ export interface RecommendedNumber {
   frequency: number
   currentGap: number
   pairScore: number
+  score: number
 }

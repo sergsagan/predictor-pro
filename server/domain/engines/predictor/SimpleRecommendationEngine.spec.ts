@@ -147,4 +147,27 @@ describe('SimpleRecommendationEngine', () => {
 
     expect(recommendation.numbers.map((n) => n.value)).toEqual([3, 4, 6, 5])
   })
+
+  it('returns recommendation score', () => {
+    const engine = new SimpleRecommendationEngine()
+
+    const recommendation = engine.recommend(
+      samplePairFrequencyRecommendationStatisticsResult
+    )
+
+    expect(recommendation.numbers[0]).toMatchObject({
+      value: 3,
+      score: expect.any(Number)
+    })
+  })
+
+  it('calculates recommendation score', () => {
+    const engine = new SimpleRecommendationEngine()
+
+    const recommendation = engine.recommend(
+      samplePairFrequencyRecommendationStatisticsResult
+    )
+
+    expect(recommendation.numbers[1]?.score).toBe(20)
+  })
 })
