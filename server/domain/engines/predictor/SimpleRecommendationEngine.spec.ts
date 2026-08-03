@@ -170,4 +170,25 @@ describe('SimpleRecommendationEngine', () => {
 
     expect(recommendation.numbers[1]?.score).toBe(20)
   })
+
+  it('includes last seen information', () => {
+    const engine = new SimpleRecommendationEngine()
+
+    const recommendation = engine.recommend({
+      frequency: new Map([[17, 10]]),
+
+      currentGap: new Map([[17, 8]]),
+
+      lastSeen: new Map([[17, 123]]),
+
+      gap: new Map(),
+
+      pairFrequency: new Map()
+    })
+
+    expect(recommendation.numbers[0]).toMatchObject({
+      value: 17,
+      lastSeen: 123
+    })
+  })
 })

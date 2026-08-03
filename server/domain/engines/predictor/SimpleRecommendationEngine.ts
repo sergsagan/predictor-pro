@@ -20,6 +20,7 @@ export class SimpleRecommendationEngine implements RecommendationEngine {
       if (best !== undefined) {
         const frequency = statistics.frequency.get(best) ?? 0
         const currentGap = statistics.currentGap.get(best) ?? 0
+        const lastSeen = statistics.lastSeen.get(best) ?? 0
         const pairScore = this.getPairFrequencyScore(
           best,
           selectedNumbers,
@@ -30,6 +31,7 @@ export class SimpleRecommendationEngine implements RecommendationEngine {
           value: best,
           frequency,
           currentGap,
+          lastSeen,
           pairScore,
           score: this.calculateScore(frequency, currentGap, pairScore)
         })
