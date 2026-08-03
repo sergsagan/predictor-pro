@@ -1,0 +1,96 @@
+# Lottery Prediction Engine
+
+## Vision
+
+Lottery Prediction Engine analyzes historical lottery draws, calculates statistics, and recommends the most promising numbers together with an explanation of every recommendation.
+
+---
+
+# Version 1.0
+
+## EPIC 1 — Statistics Engine
+
+### Sprint 1
+- [x] Frequency
+
+### Sprint 2
+- [x] Last Seen
+
+### Sprint 3
+- [x] Gap
+
+### Sprint 4
+- [x] Current Gap
+
+### Sprint 5
+- [x] Statistics Result
+
+### Sprint 6
+- [x] Statistics API
+
+### Sprint 7
+- [x] Pair Frequency
+
+### Sprint 8
+- [x] Pair Frequency Integration
+
+---
+
+## EPIC 2 — Recommendation Engine
+
+### Sprint 9
+- [x] Simple Recommendation Engine
+
+### Sprint 10
+- [x] Pair Frequency Recommendation
+
+### Sprint 11
+- [x] Recommendation Score
+
+### Sprint 12
+- [x] Recommendation Details
+  - Frequency
+  - Current Gap
+  - Last Seen
+  - Pair Score
+  - Recommendation Score
+
+---
+
+## EPIC 3 — Number Analysis
+
+### Sprint 13
+- [ ] Number Analysis Model
+
+### Sprint 14
+- [ ] Number Analysis Service
+
+### Sprint 15
+- [ ] Recommendation View Model
+
+### Sprint 16
+- [ ] Recommendation API
+
+---
+
+## EPIC 4 — Recommendation Validation
+
+### Sprint 17
+- [ ] Backtesting Engine
+
+### Sprint 18
+- [ ] Accuracy Metrics
+
+### Sprint 19
+- [ ] Recommendation History
+
+### Sprint 20
+- [ ] Algorithm Comparison
+
+---
+
+## EPIC 5 — Weighted Recommendation
+
+- [ ] Weighted Score
+- [ ] Configurable Weights
+- [ ] Alternative Recommendation Strategies

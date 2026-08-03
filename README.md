@@ -1,75 +1,38 @@
-# Nuxt Minimal Starter
+# Lottery Prediction Engine
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Lottery Prediction Engine analyzes historical lottery draws and recommends the most promising numbers.
 
-## Setup
+## Documentation
 
-Make sure to install dependencies:
+- docs/ROADMAP.md
+- docs/ARCHITECTURE.md
+- docs/DECISIONS.md
 
-```bash
-# npm
-npm install
+## Development
 
-# pnpm
-pnpm install
+The project follows:
 
-# yarn
-yarn install
+- Clean Architecture
+- DDD
+- TDD
+- Vue 3
+- Nuxt 3
+- Typescript
+- Tailwind CSS
+- Pinia
+- Vite
+- ESLint
+- Prettier
 
-# bun
-bun install
-```
+## Project Status
 
-## Development Server
+Current Version: v0.3
 
-Start the development server on `http://localhost:3000`:
+Current Epic:
+Recommendation Engine
 
-```bash
-# npm
-npm run dev
+Current Sprint:
+Sprint 12 — Recommendation Details
 
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Status:
+In Progress
