@@ -1,7 +1,7 @@
 import type { RecommendationEngine } from './RecommendationEngine'
 import type { Recommendation } from '@server/domain/models/Recommendation'
 import type { StatisticsResult } from '@server/domain/engines/statistics/StatisticsResult'
-import { createPairKey } from '../statistics/calculators/pairFrequency/createPairKey'
+import { calculatePairScore } from '../statistics/calculators/pairFrequency/calculatePairScore'
 
 export class SimpleRecommendationEngine implements RecommendationEngine {
   recommend(statistics: StatisticsResult): Recommendation {
@@ -21,10 +21,10 @@ export class SimpleRecommendationEngine implements RecommendationEngine {
         const frequency = statistics.frequency.get(best) ?? 0
         const currentGap = statistics.currentGap.get(best) ?? 0
         const lastSeen = statistics.lastSeen.get(best) ?? 0
-        const pairScore = this.getPairFrequencyScore(
+        const pairScore = calculatePairScore(
           best,
           selectedNumbers,
-          statistics
+          statistics.pairFrequency
         )
 
         recommendationNumbers.push({
@@ -73,16 +73,16 @@ export class SimpleRecommendationEngine implements RecommendationEngine {
       return currentGapB - currentGapA
     }
 
-    const pairScoreA = this.getPairFrequencyScore(
+    const pairScoreA = calculatePairScore(
       a,
       selectedNumbers,
-      statistics
+      statistics.pairFrequency
     )
 
-    const pairScoreB = this.getPairFrequencyScore(
+    const pairScoreB = calculatePairScore(
       b,
       selectedNumbers,
-      statistics
+      statistics.pairFrequency
     )
 
     if (pairScoreA !== pairScoreB) {
@@ -90,20 +90,5 @@ export class SimpleRecommendationEngine implements RecommendationEngine {
     }
 
     return a - b
-  }
-
-  private getPairFrequencyScore(
-    candidate: number,
-    selectedNumbers: readonly number[],
-    statistics: StatisticsResult
-  ): number {
-    let score = 0
-
-    for (const selected of selectedNumbers) {
-      score +=
-        statistics.pairFrequency.get(createPairKey(candidate, selected)) ?? 0
-    }
-
-    return score
   }
 }

@@ -10,11 +10,29 @@ The goal is to keep business logic independent from infrastructure, APIs and pre
 
 ```
 server/
+├── api/
 ├── application/
 ├── domain/
 ├── infrastructure/
 └── test/
 ```
+
+---
+
+## API
+
+Entry point of the application.
+
+Responsible for:
+
+- HTTP endpoints
+- Request validation
+- Calling Application layer
+- Returning API responses
+
+The API layer **must not** contain business logic.
+
+---
 
 ## Domain
 
@@ -77,6 +95,25 @@ Contains:
 - Test Helpers
 
 Tests should never contain business logic.
+
+---
+
+# Dependency Flow
+
+            API
+             │
+             ▼
+      Application
+             │
+             ▼
+         Domain
+             ▲
+             │
+     Infrastructure
+
+Dependencies always point towards the Domain.
+
+The Domain layer must not depend on any other project layer.
 
 ---
 
