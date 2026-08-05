@@ -32,7 +32,7 @@ Current Epic:
 Recommendation Engine
 
 Current Sprint:
-Sprint 12 — Recommendation Details
+Sprint 13 — Number Analysis Model
 
 Status:
 In Progress
