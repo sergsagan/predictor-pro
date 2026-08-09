@@ -32,7 +32,7 @@ Current Epic:
 Number Analysis
 
 Current Sprint:
-Sprint 14 — Number Analysis Service
+Sprint 15 — Recommendation View Model
 
 Status:
 Completed
