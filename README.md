@@ -16,7 +16,7 @@ The project follows:
 - DDD
 - TDD
 - Vue 3
-- Nuxt 3
+- Nuxt 4
 - Typescript
 - Tailwind CSS
 - Pinia
@@ -29,7 +29,7 @@ The project follows:
 Current Version: v0.3
 
 Current Epic:
-Recommendation Engine
+Number Analysis
 
 Current Sprint:
 Sprint 14 — Number Analysis Service
