@@ -6,7 +6,7 @@ import { toStatisticsDto } from '@server/application/statistics/mappers/toStatis
 
 export default defineEventHandler(async () => {
   const repository = createCsvDrawRepository({
-    filePath: 'data/eurojackpot/draws.csv'
+    filePath: 'data/draws.csv'
   })
 
   const engine = createStatisticsEngine()
