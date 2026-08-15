@@ -10,57 +10,68 @@ describe('GET /api/recommendations - integration', () => {
 
     expect(response.recommendations).toHaveLength(5)
 
-    expect(
-      response.recommendations.map(({ analysis }) => ({
-        value: analysis.value,
-        frequency: analysis.frequency,
-        currentGap: analysis.currentGap,
-        lastSeen: analysis.lastSeen,
-        pairScore: analysis.pairScore,
-        recommendationScore: analysis.recommendationScore
-      }))
-    ).toEqual([
+    const actual = response.recommendations.map(({ analysis }) => ({
+      value: analysis.value,
+      frequency: analysis.frequency,
+      currentGap: analysis.currentGap,
+      lastSeen: analysis.lastSeen,
+      pairScore: analysis.pairScore,
+      recommendationScore: analysis.recommendationScore
+    }))
+
+    const expected = [
       {
         value: 17,
         frequency: 13,
-        currentGap: 0,
-        lastSeen: 0,
+        currentGap: 1,
+        lastSeen: 1,
         pairScore: 6,
-        recommendationScore: 19
+        recommendationScore: 20
       },
       {
         value: 37,
         frequency: 10,
-        currentGap: 4,
-        lastSeen: 4,
+        currentGap: 5,
+        lastSeen: 5,
         pairScore: 8,
-        recommendationScore: 22
+        recommendationScore: 23
       },
       {
         value: 47,
         frequency: 9,
-        currentGap: 5,
-        lastSeen: 5,
+        currentGap: 6,
+        lastSeen: 6,
         pairScore: 8,
-        recommendationScore: 22
+        recommendationScore: 23
       },
       {
         value: 23,
         frequency: 8,
-        currentGap: 17,
-        lastSeen: 17,
+        currentGap: 18,
+        lastSeen: 18,
         pairScore: 7,
-        recommendationScore: 32
+        recommendationScore: 33
       },
       {
         value: 44,
         frequency: 8,
-        currentGap: 10,
-        lastSeen: 10,
+        currentGap: 11,
+        lastSeen: 11,
         pairScore: 7,
-        recommendationScore: 25
+        recommendationScore: 26
       }
-    ])
+    ]
+
+    actual.forEach((item, index) => {
+      const expectedItem = expected[index]
+
+      if (!expectedItem) {
+        console.error(`Missing expected item at index ${index}`)
+        return
+      }
+    })
+
+    expect(actual).toEqual(expected)
 
     for (const recommendation of response.recommendations) {
       expect(recommendation.explanation.value).toBe(

@@ -32,7 +32,7 @@ Current Epic:
 Number Analysis
 
 Current Sprint:
-Sprint 15 — Recommendation View Model
+Sprint 16 — Recommendation API
 
 Status:
 Completed
