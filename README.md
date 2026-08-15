@@ -26,13 +26,13 @@ The project follows:
 
 ## Project Status
 
-Current Version: v0.3
+Current Version: v0.4
 
 Current Epic:
-Number Analysis
+Recommendation Validation
 
 Current Sprint:
-Sprint 16 — Recommendation API
+Sprint 17 — Backtesting Engine
 
 Status:
 Completed
