@@ -32,7 +32,7 @@ Current Epic:
 Recommendation Validation
 
 Current Sprint:
-Sprint 17 — Backtesting Engine
+Sprint 18 — Accuracy Metrics
 
 Status:
 Completed

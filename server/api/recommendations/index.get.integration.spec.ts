@@ -66,8 +66,7 @@ describe('GET /api/recommendations - integration', () => {
       const expectedItem = expected[index]
 
       if (!expectedItem) {
-        console.error(`Missing expected item at index ${index}`)
-        return
+        throw new Error(`Missing expected item at index ${index}`)
       }
     })
 
