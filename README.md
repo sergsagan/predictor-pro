@@ -32,7 +32,7 @@ Current Epic:
 Recommendation Validation
 
 Current Sprint:
-Sprint 18 — Accuracy Metrics
+Sprint 19 — Recommendation History
 
 Status:
 Completed
