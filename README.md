@@ -32,7 +32,7 @@ Current Epic:
 Recommendation Validation
 
 Current Sprint:
-Sprint 19 — Recommendation History
+Task 20 — Algorithm comparison
 
 Status:
 Completed
