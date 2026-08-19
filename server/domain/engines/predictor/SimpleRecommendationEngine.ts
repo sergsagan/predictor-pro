@@ -2,6 +2,7 @@ import type { RecommendationEngine } from './RecommendationEngine'
 import type { Recommendation } from '@server/domain/models/Recommendation'
 import type { StatisticsResult } from '@server/domain/engines/statistics/StatisticsResult'
 import { calculatePairScore } from '../statistics/calculators/pairFrequency/calculatePairScore'
+import { calculateWeightedScore } from '../statistics/calculators/recommendation/WeightedScoreCalculator'
 
 export class SimpleRecommendationEngine implements RecommendationEngine {
   recommend(statistics: StatisticsResult): Recommendation {
@@ -33,7 +34,16 @@ export class SimpleRecommendationEngine implements RecommendationEngine {
           currentGap,
           lastSeen,
           pairScore,
-          score: this.calculateScore(frequency, currentGap, pairScore)
+          score: calculateWeightedScore({
+            frequency,
+            currentGap,
+            pairScore,
+            weights: {
+              frequency: 1,
+              currentGap: 1,
+              pairScore: 1
+            }
+          })
         })
 
         selectedNumbers.push(best)
@@ -43,14 +53,6 @@ export class SimpleRecommendationEngine implements RecommendationEngine {
     return {
       numbers: recommendationNumbers
     }
-  }
-
-  private calculateScore(
-    frequency: number,
-    currentGap: number,
-    pairScore: number
-  ): number {
-    return frequency + currentGap + pairScore
   }
 
   private compareNumbers(

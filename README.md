@@ -26,13 +26,13 @@ The project follows:
 
 ## Project Status
 
-Current Version: v0.4
+Current Version: v0.5
 
 Current Epic:
-Recommendation Validation
+Weighted Recommendation
 
 Current Sprint:
-Task 20 — Algorithm comparison
+Task 21 — Weighted Score
 
 Status:
 Completed

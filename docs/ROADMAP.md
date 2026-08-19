@@ -91,6 +91,11 @@ Lottery Prediction Engine analyzes historical lottery draws, calculates statisti
 
 ## EPIC 5 — Weighted Recommendation
 
+### Sprint 21
 - [ ] Weighted Score
+
+### Sprint 22
 - [ ] Configurable Weights
+
+### Sprint 23
 - [ ] Alternative Recommendation Strategies

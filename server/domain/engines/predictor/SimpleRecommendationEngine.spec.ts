@@ -191,4 +191,18 @@ describe('SimpleRecommendationEngine', () => {
       lastSeen: 123
     })
   })
+
+  it('uses weighted score calculation', () => {
+    const engine = new SimpleRecommendationEngine()
+
+    const recommendation = engine.recommend({
+      frequency: new Map([[17, 10]]),
+      currentGap: new Map([[17, 8]]),
+      lastSeen: new Map([[17, 123]]),
+      gap: new Map(),
+      pairFrequency: new Map()
+    })
+
+    expect(recommendation.numbers[0]?.score).toBe(18)
+  })
 })
