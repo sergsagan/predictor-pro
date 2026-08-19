@@ -1,10 +1,23 @@
 import type { RecommendationEngine } from './RecommendationEngine'
 import type { Recommendation } from '@server/domain/models/Recommendation'
 import type { StatisticsResult } from '@server/domain/engines/statistics/StatisticsResult'
+import type { RecommendationWeights } from './RecommendationWeights'
 import { calculatePairScore } from '../statistics/calculators/pairFrequency/calculatePairScore'
 import { calculateWeightedScore } from '../statistics/calculators/recommendation/WeightedScoreCalculator'
 
 export class SimpleRecommendationEngine implements RecommendationEngine {
+  private readonly weights: RecommendationWeights
+
+  constructor(
+    weights: RecommendationWeights = {
+      frequency: 1,
+      currentGap: 1,
+      pairScore: 1
+    }
+  ) {
+    this.weights = weights
+  }
+
   recommend(statistics: StatisticsResult): Recommendation {
     const availableNumbers = Array.from(statistics.frequency.keys())
 
@@ -38,11 +51,7 @@ export class SimpleRecommendationEngine implements RecommendationEngine {
             frequency,
             currentGap,
             pairScore,
-            weights: {
-              frequency: 1,
-              currentGap: 1,
-              pairScore: 1
-            }
+            weights: this.weights
           })
         })
 

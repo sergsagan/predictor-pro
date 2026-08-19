@@ -205,4 +205,54 @@ describe('SimpleRecommendationEngine', () => {
 
     expect(recommendation.numbers[0]?.score).toBe(18)
   })
+
+  it('uses configurable weights', () => {
+    const engine = new SimpleRecommendationEngine({
+      frequency: 2,
+      currentGap: 0.5,
+      pairScore: 3
+    })
+
+    const recommendation = engine.recommend({
+      frequency: new Map([[17, 10]]),
+      currentGap: new Map([[17, 4]]),
+      lastSeen: new Map([[17, 123]]),
+      gap: new Map(),
+      pairFrequency: new Map()
+    })
+
+    expect(recommendation.numbers[0]?.score).toBe(22)
+  })
+
+  it('uses default weights when no configuration is provided', () => {
+    const engine = new SimpleRecommendationEngine()
+
+    const recommendation = engine.recommend({
+      frequency: new Map([[17, 10]]),
+      currentGap: new Map([[17, 4]]),
+      lastSeen: new Map([[17, 123]]),
+      gap: new Map(),
+      pairFrequency: new Map()
+    })
+
+    expect(recommendation.numbers[0]?.score).toBe(14)
+  })
+
+  it('allows increasing the frequency weight independently', () => {
+    const engine = new SimpleRecommendationEngine({
+      frequency: 2,
+      currentGap: 1,
+      pairScore: 1
+    })
+
+    const recommendation = engine.recommend({
+      frequency: new Map([[17, 10]]),
+      currentGap: new Map([[17, 4]]),
+      lastSeen: new Map([[17, 123]]),
+      gap: new Map(),
+      pairFrequency: new Map()
+    })
+
+    expect(recommendation.numbers[0]?.score).toBe(24)
+  })
 })
