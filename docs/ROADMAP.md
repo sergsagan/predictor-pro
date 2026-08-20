@@ -99,3 +99,35 @@ Lottery Prediction Engine analyzes historical lottery draws, calculates statisti
 
 ### Sprint 23
 - [ ] Alternative Recommendation Strategies
+
+---
+
+## EPIC 6 — Recommendation Optimization
+
+### Sprint 24
+- [ ] Strategy Configuration
+
+### Sprint 25
+- [ ] Weight Optimization
+
+### Sprint 26
+- [ ] Parameter Search
+
+### Sprint 27
+- [ ] Strategy Optimization
+
+---
+
+## EPIC 7 — Prediction API & Application Layer
+
+### Sprint 28
+- [ ] Prediction Service
+
+### Sprint 29
+- [ ] Prediction API
+
+### Sprint 30
+- [ ] Strategy Comparison API
+
+### Sprint 31
+- [ ] Recommendation Explanation

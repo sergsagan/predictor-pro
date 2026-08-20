@@ -26,13 +26,13 @@ The project follows:
 
 ## Project Status
 
-Current Version: v0.5
+Current Version: v0.6
 
 Current Epic:
-Weighted Recommendation
+Recommendation Optimization
 
 Current Sprint:
-Task 21 — Weighted Score
+Task 24 — Strategy Configuration
 
 Status:
 Completed
