@@ -29,15 +29,15 @@ describe('AccuracyMetricsCalculator integration', () => {
 
     expect(metrics).toEqual({
       totalPredictions: 54,
-      totalMatches: 33,
-      averageMatches: 33 / 54,
-      predictionsWithMatches: 26,
-      hitRate: 26 / 54,
+      totalMatches: 24,
+      averageMatches: 0.4444444444444444,
+      predictionsWithMatches: 20,
+      hitRate: 0.37037037037037035,
       distribution: {
-        0: 28,
-        1: 20,
-        2: 5,
-        3: 1,
+        0: 34,
+        1: 16,
+        2: 4,
+        3: 0,
         4: 0,
         5: 0
       }

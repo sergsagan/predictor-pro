@@ -21,43 +21,43 @@ describe('GET /api/recommendations - integration', () => {
 
     const expected = [
       {
-        value: 17,
-        frequency: 13,
-        currentGap: 1,
-        lastSeen: 1,
-        pairScore: 6,
-        recommendationScore: 20
+        value: 15,
+        frequency: 4,
+        currentGap: 25,
+        lastSeen: 25,
+        pairScore: 2,
+        recommendationScore: 31
       },
       {
-        value: 37,
-        frequency: 10,
-        currentGap: 5,
-        lastSeen: 5,
-        pairScore: 8,
-        recommendationScore: 23
-      },
-      {
-        value: 47,
-        frequency: 9,
-        currentGap: 6,
-        lastSeen: 6,
-        pairScore: 8,
-        recommendationScore: 23
+        value: 7,
+        frequency: 3,
+        currentGap: 25,
+        lastSeen: 25,
+        pairScore: 2,
+        recommendationScore: 30
       },
       {
         value: 23,
         frequency: 8,
         currentGap: 18,
         lastSeen: 18,
-        pairScore: 7,
-        recommendationScore: 33
+        pairScore: 3,
+        recommendationScore: 29
       },
       {
-        value: 44,
-        frequency: 8,
-        currentGap: 11,
-        lastSeen: 11,
-        pairScore: 7,
+        value: 32,
+        frequency: 3,
+        currentGap: 24,
+        lastSeen: 24,
+        pairScore: 1,
+        recommendationScore: 28
+      },
+      {
+        value: 33,
+        frequency: 3,
+        currentGap: 21,
+        lastSeen: 21,
+        pairScore: 2,
         recommendationScore: 26
       }
     ]

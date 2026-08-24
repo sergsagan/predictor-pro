@@ -1,7 +1,16 @@
 import type { AccuracyMetrics } from '@server/domain/models/AccuracyMetrics'
 import type { BacktestResult } from '@server/domain/models/BacktestResult'
 
-function createEmptyDistribution(): AccuracyMetrics['distribution'] {
+type MutableAccuracyDistribution = {
+  0: number
+  1: number
+  2: number
+  3: number
+  4: number
+  5: number
+}
+
+function createEmptyDistribution(): MutableAccuracyDistribution {
   return {
     0: 0,
     1: 0,

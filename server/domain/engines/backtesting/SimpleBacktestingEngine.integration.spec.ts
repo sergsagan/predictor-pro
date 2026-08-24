@@ -63,7 +63,7 @@ describe('SimpleBacktestingEngine integration', () => {
     ).length
 
     expect(result).toHaveLength(draws.length - 1)
-    expect(totalMatches).toBe(33)
-    expect(predictionsWithMatches).toBe(26)
+    expect(totalMatches).toBe(24)
+    expect(predictionsWithMatches).toBe(20)
   })
 })

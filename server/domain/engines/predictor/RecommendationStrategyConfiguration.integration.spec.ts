@@ -33,18 +33,18 @@ describe('Recommendation Strategy Configuration integration', () => {
 
     expect(recommendation.numbers).toMatchObject([
       {
-        value: 1,
-        frequency: 10,
-        currentGap: 5,
-        pairScore: 0,
-        score: 35
-      },
-      {
         value: 2,
         frequency: 5,
         currentGap: 10,
         pairScore: 0,
         score: 40
+      },
+      {
+        value: 1,
+        frequency: 10,
+        currentGap: 5,
+        pairScore: 0,
+        score: 35
       }
     ])
   })

@@ -73,16 +73,8 @@ export class SimpleRecommendationEngine implements RecommendationEngine {
     const frequencyA = statistics.frequency.get(a) ?? 0
     const frequencyB = statistics.frequency.get(b) ?? 0
 
-    if (frequencyA !== frequencyB) {
-      return frequencyB - frequencyA
-    }
-
     const currentGapA = statistics.currentGap.get(a) ?? 0
     const currentGapB = statistics.currentGap.get(b) ?? 0
-
-    if (currentGapA !== currentGapB) {
-      return currentGapB - currentGapA
-    }
 
     const pairScoreA = calculatePairScore(
       a,
@@ -96,8 +88,22 @@ export class SimpleRecommendationEngine implements RecommendationEngine {
       statistics.pairFrequency
     )
 
-    if (pairScoreA !== pairScoreB) {
-      return pairScoreB - pairScoreA
+    const scoreA = calculateWeightedScore({
+      frequency: frequencyA,
+      currentGap: currentGapA,
+      pairScore: pairScoreA,
+      weights: this.weights
+    })
+
+    const scoreB = calculateWeightedScore({
+      frequency: frequencyB,
+      currentGap: currentGapB,
+      pairScore: pairScoreB,
+      weights: this.weights
+    })
+
+    if (scoreA !== scoreB) {
+      return scoreB - scoreA
     }
 
     return a - b

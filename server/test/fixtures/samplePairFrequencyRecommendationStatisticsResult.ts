@@ -6,16 +6,14 @@ export const samplePairFrequencyRecommendationStatisticsResult: StatisticsResult
   {
     frequency: new Map([
       [3, 20],
-      [4, 19],
-      [5, 10],
-      [6, 10]
+      [4, 10],
+      [5, 10]
     ]),
 
     currentGap: new Map([
       [3, 1],
-      [4, 1],
-      [5, 5],
-      [6, 5]
+      [4, 5],
+      [5, 5]
     ]),
 
     lastSeen: new Map(),
@@ -23,10 +21,7 @@ export const samplePairFrequencyRecommendationStatisticsResult: StatisticsResult
     gap: new Map(),
 
     pairFrequency: new Map([
-      [createPairKey(3, 5), 2],
-      [createPairKey(4, 5), 1],
-
-      [createPairKey(3, 6), 8],
-      [createPairKey(4, 6), 5]
+      [createPairKey(3, 4), 2],
+      [createPairKey(3, 5), 8]
     ])
   }

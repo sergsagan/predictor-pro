@@ -3,14 +3,12 @@ import type { StatisticsResult } from '@server/domain/engines/statistics/Statist
 export const sampleEqualRecommendationStatisticsResult: StatisticsResult = {
   frequency: new Map([
     [1, 10],
-    [2, 10],
-    [3, 9]
+    [2, 10]
   ]),
 
   currentGap: new Map([
     [1, 5],
-    [2, 5],
-    [3, 100]
+    [2, 5]
   ]),
 
   lastSeen: new Map(),
