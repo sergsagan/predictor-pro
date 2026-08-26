@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { createCsvDrawRepository } from '@server/domain/repositories/draws/CsvDrawRepository'
 import { createStatisticsEngine } from '@server/domain/engines/statistics/DefaultStatisticsEngine'
-import { GapFocusedRecommendationEngine } from '@server/domain/engines/predictor/engines/GapFocusedRecommendationEngine'
+import { GapFocusedRecommendationEngine } from '@server/domain/engines/recommendation/engines/GapFocusedRecommendationEngine'
 
 import { SimpleBacktestingEngine } from './SimpleBacktestingEngine'
 import { calculateAccuracyMetrics } from './AccuracyMetricsCalculator'

@@ -1,5 +1,5 @@
-import type { RecommendationStrategyConfig } from '../../config/RecommendationStrategyConfig'
-import type { RecommendationStrategy } from '../../config/RecommendationStrategy'
+import type { RecommendationStrategyConfig } from '../../recommendation/config/RecommendationStrategyConfig'
+import type { RecommendationStrategy } from '../../recommendation/config/RecommendationStrategy'
 
 type ParameterSearch = Readonly<{
   strategy: RecommendationStrategy

@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from 'vitest'
 
 import type { Draw } from '@server/domain/models/Draw'
 import type { StatisticsEngine } from '../statistics/StatisticsEngine'
-import type { RecommendationEngine } from '../predictor/engines/RecommendationEngine'
+import type { RecommendationEngine } from '../recommendation/engines/RecommendationEngine'
 
 import { SimpleBacktestingEngine } from './SimpleBacktestingEngine'
 

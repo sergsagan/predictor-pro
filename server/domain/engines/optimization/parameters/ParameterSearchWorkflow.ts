@@ -2,7 +2,7 @@ import type { Draw } from '@server/domain/models/Draw'
 
 import type { WeightOptimizationEvaluator } from '../weights/WeightOptimizationEvaluator'
 import type { WeightOptimizationResult } from '../weights/WeightOptimizationResult'
-import type { RecommendationStrategy } from '../../config/RecommendationStrategy'
+import type { RecommendationStrategy } from '../../recommendation/config/RecommendationStrategy'
 
 import { generateParameterConfigurations } from './ParameterSearch'
 import { optimizeWeightConfigurations } from '../weights/WeightOptimizationWorkflow'

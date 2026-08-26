@@ -1,6 +1,6 @@
 import type { Draw } from '@server/domain/models/Draw'
 
-import type { RecommendationStrategy } from '../../config/RecommendationStrategy'
+import type { RecommendationStrategy } from '../../recommendation/config/RecommendationStrategy'
 import type { WeightOptimizationEvaluator } from '../weights/WeightOptimizationEvaluator'
 import type { StrategyOptimizationResult } from './StrategyOptimizationResult'
 
