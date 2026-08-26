@@ -32,7 +32,7 @@ Current Epic:
 Recommendation Optimization
 
 Current Sprint:
-Task 25 — Weight Optimization
+Task 27 — Strategy Optimization
 
 Status:
 Completed
