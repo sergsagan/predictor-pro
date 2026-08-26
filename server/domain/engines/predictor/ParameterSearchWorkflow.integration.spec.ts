@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import type { BacktestingEngine } from '@server/domain/engines/backtesting/BacktestingEngine'
+import type { BacktestingEngine } from '../backtesting/BacktestingEngine'
 import type { RecommendationStrategyConfig } from './RecommendationStrategyConfig'
 
 import { createStatisticsEngine } from '../statistics/DefaultStatisticsEngine'
