@@ -1,7 +1,7 @@
 import { DefaultRunBacktesting } from '@server/application/backtesting/DefaultRunBacktesting'
 
 import { createStatisticsEngine } from '@server/domain/engines/statistics/DefaultStatisticsEngine'
-import { SimpleRecommendationEngine } from '@server/domain/engines/predictor/SimpleRecommendationEngine'
+import { SimpleRecommendationEngine } from '@server/domain/engines/predictor/engines/SimpleRecommendationEngine'
 
 import { SimpleBacktestingEngine } from '@server/domain/engines/backtesting/SimpleBacktestingEngine'
 import { createCsvDrawRepository } from '@server/domain/repositories/draws/CsvDrawRepository'

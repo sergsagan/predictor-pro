@@ -3,7 +3,7 @@ import type { BacktestingEngine } from '@server/domain/engines/backtesting/Backt
 
 import { calculateAccuracyMetrics } from '@server/domain/engines/backtesting/AccuracyMetricsCalculator'
 
-import type { RecommendationStrategyConfig } from './RecommendationStrategyConfig'
+import type { RecommendationStrategyConfig } from '../../config/RecommendationStrategyConfig'
 import type { WeightOptimizationResult } from './WeightOptimizationResult'
 
 type BacktestingEngineFactory = (

@@ -1,9 +1,9 @@
 import { describe, expect, it, vi } from 'vitest'
 
 import type { Draw } from '@server/domain/models/Draw'
-import type { WeightOptimizationResult } from './WeightOptimizationResult'
+import type { WeightOptimizationResult } from '../weights/WeightOptimizationResult'
 import type { StrategyOptimizationResult } from './StrategyOptimizationResult'
-import type { WeightOptimizationEvaluator } from './WeightOptimizationEvaluator'
+import type { WeightOptimizationEvaluator } from '../weights/WeightOptimizationEvaluator'
 
 import { optimizeStrategiesWorkflow } from './StrategyOptimizationWorkflow'
 

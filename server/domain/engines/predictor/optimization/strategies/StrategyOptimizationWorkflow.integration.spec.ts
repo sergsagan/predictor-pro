@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest'
 
 import type { BacktestingEngine } from '@server/domain/engines/backtesting/BacktestingEngine'
-import type { RecommendationStrategyConfig } from './RecommendationStrategyConfig'
+import type { RecommendationStrategyConfig } from '../../config/RecommendationStrategyConfig'
 
-import { createStatisticsEngine } from '../statistics/DefaultStatisticsEngine'
-import { SimpleBacktestingEngine } from '../backtesting/SimpleBacktestingEngine'
+import { createStatisticsEngine } from '../../../statistics/DefaultStatisticsEngine'
+import { SimpleBacktestingEngine } from '../../../backtesting/SimpleBacktestingEngine'
 
-import { createRecommendationEngine } from './createRecommendationEngine'
-import { WeightOptimizationEvaluator } from './WeightOptimizationEvaluator'
+import { createRecommendationEngine } from '../../engines/createRecommendationEngine'
+import { WeightOptimizationEvaluator } from '../weights/WeightOptimizationEvaluator'
 import { optimizeStrategiesWorkflow } from './StrategyOptimizationWorkflow'
 
 describe('StrategyOptimizationWorkflow integration', () => {

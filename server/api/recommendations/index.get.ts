@@ -3,7 +3,7 @@ import { defineEventHandler } from 'h3'
 import { DefaultGenerateRecommendations } from '@server/application/recommendation/DefaultGenerateRecommendations'
 
 import { createStatisticsEngine } from '@server/domain/engines/statistics/DefaultStatisticsEngine'
-import { SimpleRecommendationEngine } from '@server/domain/engines/predictor/SimpleRecommendationEngine'
+import { SimpleRecommendationEngine } from '@server/domain/engines/predictor/engines/SimpleRecommendationEngine'
 import { SimpleNumberAnalysisEngine } from '@server/domain/engines/analysis/SimpleNumberAnalysisEngine'
 import { SimpleNumberExplanationEngine } from '@server/domain/engines/explanation/SimpleNumberExplanationEngine'
 

@@ -1,12 +1,11 @@
 import type { RecommendationEngine } from './RecommendationEngine'
 import type { Recommendation } from '@server/domain/models/Recommendation'
 import type { StatisticsResult } from '@server/domain/engines/statistics/StatisticsResult'
-import type { RecommendationWeights } from './RecommendationWeights'
+import type { RecommendationWeights } from '../config/RecommendationWeights'
+import { calculatePairScore } from '../../statistics/calculators/pairFrequency/calculatePairScore'
+import { calculateWeightedScore } from '../../statistics/calculators/recommendation/WeightedScoreCalculator'
 
-import { calculatePairScore } from '../statistics/calculators/pairFrequency/calculatePairScore'
-import { calculateWeightedScore } from '../statistics/calculators/recommendation/WeightedScoreCalculator'
-
-export class GapFocusedRecommendationEngine implements RecommendationEngine {
+export class SimpleRecommendationEngine implements RecommendationEngine {
   private readonly weights: RecommendationWeights
 
   constructor(
@@ -36,7 +35,6 @@ export class GapFocusedRecommendationEngine implements RecommendationEngine {
         const frequency = statistics.frequency.get(best) ?? 0
         const currentGap = statistics.currentGap.get(best) ?? 0
         const lastSeen = statistics.lastSeen.get(best) ?? 0
-
         const pairScore = calculatePairScore(
           best,
           selectedNumbers,
@@ -72,19 +70,11 @@ export class GapFocusedRecommendationEngine implements RecommendationEngine {
     statistics: StatisticsResult,
     selectedNumbers: readonly number[]
   ): number {
-    const currentGapA = statistics.currentGap.get(a) ?? 0
-    const currentGapB = statistics.currentGap.get(b) ?? 0
-
-    if (currentGapA !== currentGapB) {
-      return currentGapB - currentGapA
-    }
-
     const frequencyA = statistics.frequency.get(a) ?? 0
     const frequencyB = statistics.frequency.get(b) ?? 0
 
-    if (frequencyA !== frequencyB) {
-      return frequencyB - frequencyA
-    }
+    const currentGapA = statistics.currentGap.get(a) ?? 0
+    const currentGapB = statistics.currentGap.get(b) ?? 0
 
     const pairScoreA = calculatePairScore(
       a,
@@ -98,8 +88,22 @@ export class GapFocusedRecommendationEngine implements RecommendationEngine {
       statistics.pairFrequency
     )
 
-    if (pairScoreA !== pairScoreB) {
-      return pairScoreB - pairScoreA
+    const scoreA = calculateWeightedScore({
+      frequency: frequencyA,
+      currentGap: currentGapA,
+      pairScore: pairScoreA,
+      weights: this.weights
+    })
+
+    const scoreB = calculateWeightedScore({
+      frequency: frequencyB,
+      currentGap: currentGapB,
+      pairScore: pairScoreB,
+      weights: this.weights
+    })
+
+    if (scoreA !== scoreB) {
+      return scoreB - scoreA
     }
 
     return a - b

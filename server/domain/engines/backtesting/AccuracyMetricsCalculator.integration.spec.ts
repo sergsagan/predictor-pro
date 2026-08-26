@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { createCsvDrawRepository } from '@server/domain/repositories/draws/CsvDrawRepository'
 import { createStatisticsEngine } from '@server/domain/engines/statistics/DefaultStatisticsEngine'
-import { SimpleRecommendationEngine } from '@server/domain/engines/predictor/SimpleRecommendationEngine'
+import { SimpleRecommendationEngine } from '@server/domain/engines/predictor/engines/SimpleRecommendationEngine'
 
 import { SimpleBacktestingEngine } from './SimpleBacktestingEngine'
 import { calculateAccuracyMetrics } from './AccuracyMetricsCalculator'

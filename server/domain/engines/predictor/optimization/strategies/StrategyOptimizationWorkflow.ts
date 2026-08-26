@@ -1,11 +1,11 @@
 import type { Draw } from '@server/domain/models/Draw'
 
-import type { RecommendationStrategy } from './RecommendationStrategy'
-import type { WeightOptimizationEvaluator } from './WeightOptimizationEvaluator'
+import type { RecommendationStrategy } from '../../config/RecommendationStrategy'
+import type { WeightOptimizationEvaluator } from '../weights/WeightOptimizationEvaluator'
 import type { StrategyOptimizationResult } from './StrategyOptimizationResult'
 
-import { generateParameterConfigurations } from './ParameterSearch'
-import { optimizeWeights } from './WeightOptimizer'
+import { generateParameterConfigurations } from '../parameters/ParameterSearch'
+import { optimizeWeights } from '../weights/WeightOptimizer'
 import { optimizeStrategies } from './StrategyOptimizer'
 
 type StrategyParameterSearch = Readonly<{
