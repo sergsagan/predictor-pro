@@ -6,9 +6,9 @@ import { sampleCurrentGapRecommendationStatisticsResult } from '@server/test/fix
 import { SimpleRecommendationEngine } from './SimpleRecommendationEngine'
 import { sampleEqualRecommendationStatisticsResult } from '@server/test/fixtures/sampleEqualRecommendationStatisticsResult'
 import { samplePairFrequencyRecommendationStatisticsResult } from '@server/test/fixtures/samplePairFrequencyRecommendationStatisticsResult'
-import { createPairKey } from '../../statistics/calculators/pairFrequency/createPairKey'
-import type { StatisticsResult } from '../../statistics/StatisticsResult'
-import { calculateWeightedScore } from '../../statistics/calculators/recommendation/WeightedScoreCalculator'
+import { createPairKey } from '../statistics/calculators/pairFrequency/createPairKey'
+import type { StatisticsResult } from '../statistics/StatisticsResult'
+import { calculateWeightedScore } from '../statistics/calculators/recommendation/WeightedScoreCalculator'
 
 describe('SimpleRecommendationEngine', () => {
   it('returns five recommended numbers', () => {

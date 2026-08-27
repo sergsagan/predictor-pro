@@ -2,7 +2,7 @@ import type { Draw } from '@server/domain/models/Draw'
 import type { BacktestResult } from '@server/domain/models/BacktestResult'
 
 import type { StatisticsEngine } from '../statistics/StatisticsEngine'
-import type { RecommendationEngine } from '../recommendation/engines/RecommendationEngine'
+import type { RecommendationEngine } from '../recommendation/RecommendationEngine'
 
 import type { BacktestingEngine } from '@server/domain/engines/backtesting/BacktestingEngine'
 

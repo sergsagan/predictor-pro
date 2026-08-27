@@ -1,5 +1,5 @@
 import type { RecommendationEngine } from './RecommendationEngine'
-import type { RecommendationStrategyConfig } from '../config/RecommendationStrategyConfig'
+import type { RecommendationStrategyConfig } from './config/RecommendationStrategyConfig'
 
 import { SimpleRecommendationEngine } from './SimpleRecommendationEngine'
 import { GapFocusedRecommendationEngine } from './GapFocusedRecommendationEngine'

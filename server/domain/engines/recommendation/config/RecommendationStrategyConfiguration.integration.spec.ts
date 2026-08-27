@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { createRecommendationEngine } from '../engines/createRecommendationEngine'
+import { createRecommendationEngine } from '../createRecommendationEngine'
 
 describe('Recommendation Strategy Configuration integration', () => {
   it('creates a configured simple strategy and applies its weights', () => {

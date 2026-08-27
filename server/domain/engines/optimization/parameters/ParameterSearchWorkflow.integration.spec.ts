@@ -5,7 +5,7 @@ import type { RecommendationStrategyConfig } from '../../recommendation/config/R
 
 import { createStatisticsEngine } from '../../statistics/DefaultStatisticsEngine'
 import { SimpleBacktestingEngine } from '../../backtesting/SimpleBacktestingEngine'
-import { createRecommendationEngine } from '../../recommendation/engines/createRecommendationEngine'
+import { createRecommendationEngine } from '../../recommendation/createRecommendationEngine'
 import { WeightOptimizationEvaluator } from '../weights/WeightOptimizationEvaluator'
 import { searchParameters } from './ParameterSearchWorkflow'
 
