@@ -1,7 +1,7 @@
 import type { Draw } from '@server/domain/models/Draw'
 
 import type { StatisticsEngine } from '@server/domain/engines/statistics/StatisticsEngine'
-import type { RecommendationEngine } from '@server/domain/engines/predictor/RecommendationEngine'
+import type { RecommendationEngine } from '@server/domain/engines/recommendation/RecommendationEngine'
 import type { NumberAnalysisEngine } from '@server/domain/engines/analysis/NumberAnalysisEngine'
 import type { NumberExplanationEngine } from '@server/domain/engines/explanation/NumberExplanationEngine'
 
