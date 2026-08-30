@@ -43,4 +43,26 @@ describe('GET /api/predictions - integration', () => {
       )
     }
   })
+
+  it('returns explanations consistent with recommendation analysis', async () => {
+    const { default: handler } = await import('./index.get')
+
+    const response = await handler({} as H3Event)
+
+    expect(response.recommendations).toHaveLength(5)
+
+    for (const recommendation of response.recommendations) {
+      expect(recommendation.explanation.value).toBe(
+        recommendation.analysis.value
+      )
+
+      expect(recommendation.explanation.lines).toHaveLength(4)
+
+      expect(
+        recommendation.explanation.lines.every(
+          (line) => typeof line === 'string' && line.length > 0
+        )
+      ).toBe(true)
+    }
+  })
 })
