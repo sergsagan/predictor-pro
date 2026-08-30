@@ -6,8 +6,7 @@ import { SimpleRecommendationEngine } from '@server/domain/engines/recommendatio
 import { GapFocusedRecommendationEngine } from '@server/domain/engines/recommendation/GapFocusedRecommendationEngine'
 
 import { SimpleBacktestingEngine } from './SimpleBacktestingEngine'
-import { calculateAccuracyMetrics } from './AccuracyMetricsCalculator'
-import { compareAlgorithms } from './AlgorithmComparisonCalculator'
+import { DefaultCompareStrategies } from '@server/application/strategyComparsion/DefaultCompareStrategies'
 
 describe('Recommendation strategies comparison integration', () => {
   it('compares simple and gap-focused recommendation strategies', async () => {
@@ -29,24 +28,18 @@ describe('Recommendation strategies comparison integration', () => {
       new GapFocusedRecommendationEngine()
     )
 
-    const simpleResults = simpleBacktestingEngine.run(draws)
-
-    const gapFocusedResults = gapFocusedBacktestingEngine.run(draws)
-
-    const simpleMetrics = calculateAccuracyMetrics(simpleResults)
-
-    const gapFocusedMetrics = calculateAccuracyMetrics(gapFocusedResults)
-
-    const comparison = compareAlgorithms(
+    const service = new DefaultCompareStrategies(
       {
         name: 'Simple',
-        metrics: simpleMetrics
+        engine: simpleBacktestingEngine
       },
       {
         name: 'GapFocused',
-        metrics: gapFocusedMetrics
+        engine: gapFocusedBacktestingEngine
       }
     )
+
+    const comparison = service.execute(draws)
 
     expect(comparison.first.name).toBe('Simple')
     expect(comparison.second.name).toBe('GapFocused')
