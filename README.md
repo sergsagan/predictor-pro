@@ -26,13 +26,13 @@ The project follows:
 
 ## Project Status
 
-Current Version: v0.6
+Current Version: v0.7
 
 Current Epic:
-Recommendation Optimization
+Prediction API & Application Layer
 
 Current Sprint:
-Task 27 — Strategy Optimization
+Task 29 — Prediction API
 
 Status:
 Completed
