@@ -26,4 +26,21 @@ describe('GET /api/predictions - integration', () => {
 
     expect(secondResponse).toEqual(firstResponse)
   })
+
+  it('returns recommendations with analysis and explanation', async () => {
+    const { default: handler } = await import('./index.get')
+
+    const response = await handler({} as H3Event)
+
+    expect(response.recommendations).toHaveLength(5)
+
+    for (const recommendation of response.recommendations) {
+      expect(recommendation).toEqual(
+        expect.objectContaining({
+          analysis: expect.any(Object),
+          explanation: expect.any(Object)
+        })
+      )
+    }
+  })
 })
