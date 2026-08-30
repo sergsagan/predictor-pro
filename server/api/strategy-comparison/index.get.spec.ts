@@ -18,7 +18,7 @@ vi.mock('@server/domain/repositories/draws/CsvDrawRepository', () => ({
 }))
 
 vi.mock(
-  '@server/application/strategyComparsion/DefaultCompareStrategies',
+  '@server/application/strategyComparison/DefaultCompareStrategies',
   () => ({
     DefaultCompareStrategies: DefaultCompareStrategiesMock
   })

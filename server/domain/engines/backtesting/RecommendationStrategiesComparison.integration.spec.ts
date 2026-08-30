@@ -6,7 +6,7 @@ import { SimpleRecommendationEngine } from '@server/domain/engines/recommendatio
 import { GapFocusedRecommendationEngine } from '@server/domain/engines/recommendation/GapFocusedRecommendationEngine'
 
 import { SimpleBacktestingEngine } from './SimpleBacktestingEngine'
-import { DefaultCompareStrategies } from '@server/application/strategyComparsion/DefaultCompareStrategies'
+import { DefaultCompareStrategies } from '@server/application/strategyComparison/DefaultCompareStrategies'
 
 describe('Recommendation strategies comparison integration', () => {
   it('compares simple and gap-focused recommendation strategies', async () => {

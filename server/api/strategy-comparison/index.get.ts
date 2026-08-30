@@ -1,6 +1,6 @@
 import { defineEventHandler } from 'h3'
 
-import { DefaultCompareStrategies } from '@server/application/strategyComparsion/DefaultCompareStrategies'
+import { DefaultCompareStrategies } from '@server/application/strategyComparison/DefaultCompareStrategies'
 
 import { createStatisticsEngine } from '@server/domain/engines/statistics/DefaultStatisticsEngine'
 import { SimpleRecommendationEngine } from '@server/domain/engines/recommendation/SimpleRecommendationEngine'
