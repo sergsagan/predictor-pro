@@ -32,7 +32,7 @@ Current Epic:
 Prediction API & Application Layer
 
 Current Sprint:
-Task 29 — Prediction API
+Task 30 — Strategy Comparison API
 
 Status:
 Completed
