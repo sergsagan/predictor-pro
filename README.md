@@ -26,13 +26,13 @@ The project follows:
 
 ## Project Status
 
-Current Version: v0.7
+Current Version: v0.8
 
 Current Epic:
-Prediction API & Application Layer
+Prediction History & Persistence
 
 Current Sprint:
-Task 31 — Recommendation Explanation
+Task 32 — Prediction Model & Repository
 
 Status:
 Completed
