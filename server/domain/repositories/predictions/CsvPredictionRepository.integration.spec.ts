@@ -69,4 +69,73 @@ describe('CsvPredictionRepository integration', () => {
       ].join('\n') + '\n'
     )
   })
+
+  it('returns all saved predictions', async () => {
+    const repository = createCsvPredictionRepository({
+      filePath
+    })
+
+    const firstPrediction: Prediction = {
+      predictionDate: '2026-08-31',
+      numbers: [7, 15, 23, 32, 44]
+    }
+
+    const secondPrediction: Prediction = {
+      predictionDate: '2026-09-01',
+      numbers: [3, 12, 21, 34, 45]
+    }
+
+    await repository.save(firstPrediction)
+    await repository.save(secondPrediction)
+
+    const predictions = await repository.findAll()
+
+    expect(predictions).toEqual([firstPrediction, secondPrediction])
+  })
+
+  it('returns the latest prediction', async () => {
+    const repository = createCsvPredictionRepository({
+      filePath
+    })
+
+    const firstPrediction: Prediction = {
+      predictionDate: '2026-08-31',
+      numbers: [7, 15, 23, 32, 44]
+    }
+
+    const secondPrediction: Prediction = {
+      predictionDate: '2026-09-01',
+      numbers: [3, 12, 21, 34, 45]
+    }
+
+    await repository.save(firstPrediction)
+    await repository.save(secondPrediction)
+
+    const prediction = await repository.findLatest()
+
+    expect(prediction).toEqual(secondPrediction)
+  })
+
+  it('returns prediction by date', async () => {
+    const repository = createCsvPredictionRepository({
+      filePath
+    })
+
+    const firstPrediction: Prediction = {
+      predictionDate: '2026-08-31',
+      numbers: [7, 15, 23, 32, 44]
+    }
+
+    const secondPrediction: Prediction = {
+      predictionDate: '2026-09-01',
+      numbers: [3, 12, 21, 34, 45]
+    }
+
+    await repository.save(firstPrediction)
+    await repository.save(secondPrediction)
+
+    const prediction = await repository.findByDate('2026-08-31')
+
+    expect(prediction).toEqual(firstPrediction)
+  })
 })
