@@ -32,7 +32,7 @@ Current Epic:
 Prediction History & Persistence
 
 Current Sprint:
-Task 33 — Prediction History API
+Task 35 — Prediction Evaluation
 
 Status:
 Completed
