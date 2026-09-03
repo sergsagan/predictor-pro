@@ -24,4 +24,24 @@ describe('DefaultPredictionSchedulingService', () => {
 
     expect(service.isDue('2026-08-31', '2026-09-02')).toBe(false)
   })
+
+  it('returns true when draw is today', () => {
+    const schedule: PredictionSchedule = {
+      generateBeforeDrawDays: 1
+    }
+
+    const service = new DefaultPredictionSchedulingService(schedule)
+
+    expect(service.isDue('2026-09-02', '2026-09-02')).toBe(true)
+  })
+
+  it('returns false when draw date has already passed', () => {
+    const schedule: PredictionSchedule = {
+      generateBeforeDrawDays: 1
+    }
+
+    const service = new DefaultPredictionSchedulingService(schedule)
+
+    expect(service.isDue('2026-09-03', '2026-09-02')).toBe(false)
+  })
 })
