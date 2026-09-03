@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest'
 import type { Draw } from '@server/domain/models/Draw'
 import type { GenerateRecommendationsResult } from '../recommendation/GenerateRecommendationsResult'
 
-import { DefaultAutomaticPredictionGenerationService } from './DefaultAutomaticPredictionGenerationService'
+import { DefaultRunScheduledPrediction } from './DefaultRunScheduledPrediction'
 import type { NumberAnalysis } from '@server/domain/models/NumberAnalysis'
 
 describe('DefaultAutomaticPredictionGenerationService', () => {
@@ -45,7 +45,7 @@ describe('DefaultAutomaticPredictionGenerationService', () => {
       isDue: vi.fn().mockReturnValue(true)
     }
 
-    const service = new DefaultAutomaticPredictionGenerationService(
+    const service = new DefaultRunScheduledPrediction(
       schedulingService,
       predictionService,
       savePrediction
@@ -78,7 +78,7 @@ describe('DefaultAutomaticPredictionGenerationService', () => {
       isDue: vi.fn().mockReturnValue(false)
     }
 
-    const service = new DefaultAutomaticPredictionGenerationService(
+    const service = new DefaultRunScheduledPrediction(
       schedulingService,
       predictionService,
       savePrediction

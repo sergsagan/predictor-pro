@@ -11,7 +11,7 @@ type SavePrediction = Readonly<{
   execute(prediction: Prediction): Promise<void>
 }>
 
-export class DefaultAutomaticPredictionGenerationService {
+export class DefaultRunScheduledPrediction {
   constructor(
     private readonly schedulingService: PredictionSchedulingService,
     private readonly predictionService: PredictionService,
