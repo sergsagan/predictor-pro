@@ -50,10 +50,18 @@ export function createCsvPredictionEvaluationRepository(
   options: CsvPredictionEvaluationRepositoryOptions
 ): PredictionEvaluationRepository {
   const findAll = async (): Promise<readonly PredictionEvaluation[]> => {
-    const csv = await readFile(options.filePath, 'utf8')
-    const rows = csv.trim().split(/\r?\n/)
+    try {
+      const csv = await readFile(options.filePath, 'utf8')
+      const rows = csv.trim().split(/\r?\n/)
 
-    return rows.slice(1).map(parseRow)
+      return rows.slice(1).map(parseRow)
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== 'ENOENT') {
+        throw error
+      }
+
+      return []
+    }
   }
 
   return {
