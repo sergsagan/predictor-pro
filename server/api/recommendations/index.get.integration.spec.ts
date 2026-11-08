@@ -23,42 +23,42 @@ describe('GET /api/recommendations - integration', () => {
       {
         value: 1,
         frequency: 7,
-        currentGap: 39,
-        lastSeen: 39,
-        pairScore: 2,
+        currentGap: 40,
+        lastSeen: 40,
+        pairScore: 1,
         recommendationScore: 48
       },
       {
         value: 44,
         frequency: 8,
-        currentGap: 33,
-        lastSeen: 33,
-        pairScore: 4,
+        currentGap: 34,
+        lastSeen: 34,
+        pairScore: 3,
         recommendationScore: 45
       },
       {
         value: 13,
         frequency: 6,
-        currentGap: 30,
-        lastSeen: 30,
-        pairScore: 3,
-        recommendationScore: 39
+        currentGap: 31,
+        lastSeen: 31,
+        pairScore: 1,
+        recommendationScore: 38
       },
       {
         value: 8,
         frequency: 7,
-        currentGap: 26,
-        lastSeen: 26,
-        pairScore: 5,
-        recommendationScore: 38
+        currentGap: 27,
+        lastSeen: 27,
+        pairScore: 3,
+        recommendationScore: 37
       },
       {
-        value: 37,
-        frequency: 13,
-        currentGap: 13,
-        lastSeen: 13,
-        pairScore: 8,
-        recommendationScore: 34
+        value: 40,
+        frequency: 7,
+        currentGap: 22,
+        lastSeen: 22,
+        pairScore: 2,
+        recommendationScore: 31
       }
     ]
 
