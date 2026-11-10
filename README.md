@@ -29,10 +29,10 @@ The project follows:
 Current Version: v0.8
 
 Current Epic:
-Prediction History & Persistence
+Automated Prediction & Evaluation
 
 Current Sprint:
-Task 35 — Prediction Evaluation
+Task 37 — Automatic Prediction Evaluation
 
 Status:
 Completed
