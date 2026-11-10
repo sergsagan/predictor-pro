@@ -2,13 +2,15 @@ import { resolve } from 'node:path'
 
 import { defineConfig } from 'vitest/config'
 
+const configDir = import.meta.dirname
+
 export default defineConfig({
   resolve: {
     alias: {
-      '@app': resolve(__dirname, 'app'),
-      '@db': resolve(__dirname, 'db'),
-      '@server': resolve(__dirname, 'server'),
-      '@test': resolve(__dirname, 'server/test')
+      '@app': resolve(configDir, 'app'),
+      '@db': resolve(configDir, 'db'),
+      '@server': resolve(configDir, 'server'),
+      '@test': resolve(configDir, 'server/test')
     }
   },
 
