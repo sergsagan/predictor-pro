@@ -9,9 +9,13 @@ export default defineNuxtConfig({
     enabled: true
   },
 
-  modules: [
-    '@nuxt/eslint'
-  ],
+  modules: ['@nuxt/eslint'],
+
+  vite: {
+    optimizeDeps: {
+      include: ['@vue/devtools-core']
+    }
+  },
 
   alias: {
     '@server': resolve(__dirname, 'server'),

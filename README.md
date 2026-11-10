@@ -26,7 +26,7 @@ The project follows:
 
 ## Project Status
 
-Current Version: v0.8
+Current Version: v0.9
 
 Current Epic:
 Automated Prediction & Evaluation
