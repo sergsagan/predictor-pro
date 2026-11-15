@@ -57,3 +57,31 @@ New ideas are scheduled for future sprints.
 ### Reason
 
 Keeps development predictable and aligned with TDD.
+
+---
+
+## ADR-004
+
+### Title
+
+Strategy Performance History
+
+### Decision
+
+Strategy performance comparisons are stored as immutable snapshots.
+
+Each snapshot contains:
+
+- Evaluation timestamp
+- Latest draw date included in the comparison
+- Complete comparison results for both strategies
+- Winning strategy
+
+Snapshots are append-only.
+
+Historical snapshots are returned in chronological order.
+
+### Reason
+
+Strategy performance history provides historical evidence
+for future adaptive strategy selection.

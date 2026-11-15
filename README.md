@@ -26,13 +26,13 @@ The project follows:
 
 ## Project Status
 
-Current Version: v0.9
+Current Version: v1
 
 Current Epic:
-Automated Prediction & Evaluation
+Strategy Intelligence & Adaptation
 
 Current Sprint:
-Task 37 — Automatic Prediction Evaluation
+Task 40 Adaptive Strategy Selection
 
 Status:
 Completed
