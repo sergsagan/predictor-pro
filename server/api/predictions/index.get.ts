@@ -5,7 +5,14 @@ import { DefaultPredictionService } from '@server/application/prediction/Default
 import { DefaultGenerateRecommendations } from '@server/application/recommendation/DefaultGenerateRecommendations'
 
 import { createStatisticsEngine } from '@server/domain/engines/statistics/DefaultStatisticsEngine'
-import { SimpleRecommendationEngine } from '@server/domain/engines/recommendation/SimpleRecommendationEngine'
+import { createRecommendationEngine } from '@server/domain/engines/recommendation/createRecommendationEngine'
+
+import { DefaultGetStrategyPerformanceHistory } from '@server/application/strategyPerformance/DefaultGetStrategyPerformanceHistory'
+import { DefaultAdaptiveStrategySelector } from '@server/application/strategySelection/DefaultAdaptiveStrategySelector'
+
+import { DefaultStrategyPerformanceEvaluator } from '@server/domain/engines/strategySelection/DefaultStrategyPerformanceEvaluator'
+
+import { createCsvStrategyPerformanceRepository } from '@server/domain/repositories/strategies/CsvStrategyPerformanceRepository'
 import { SimpleNumberAnalysisEngine } from '@server/domain/engines/analysis/SimpleNumberAnalysisEngine'
 import { SimpleNumberExplanationEngine } from '@server/domain/engines/explanation/SimpleNumberExplanationEngine'
 
@@ -16,8 +23,33 @@ export default defineEventHandler(async () => {
     filePath: 'data/draws.csv'
   })
 
+  const performanceRepository = createCsvStrategyPerformanceRepository({
+    filePath: 'data/strategy-performance.csv'
+  })
+
+  const historyService = new DefaultGetStrategyPerformanceHistory(
+    performanceRepository
+  )
+
+  const evaluator = new DefaultStrategyPerformanceEvaluator()
+
+  const selector = new DefaultAdaptiveStrategySelector(
+    historyService,
+    evaluator
+  )
+
+  const selection = await selector.execute()
+
   const statisticsEngine = createStatisticsEngine()
-  const recommendationEngine = new SimpleRecommendationEngine()
+
+  const recommendationEngine = createRecommendationEngine({
+    strategy: selection.strategy,
+    weights: {
+      frequency: 1,
+      currentGap: 1,
+      pairScore: 1
+    }
+  })
   const numberAnalysisEngine = new SimpleNumberAnalysisEngine()
   const numberExplanationEngine = new SimpleNumberExplanationEngine()
 
