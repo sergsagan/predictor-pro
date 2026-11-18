@@ -1,38 +1,43 @@
 # Lottery Prediction Engine
 
-Lottery Prediction Engine analyzes historical lottery draws and recommends the most promising numbers.
+The service analyzes historical lottery draws, generates number recommendations with explanations, stores predictions, and evaluates them against actual results.
 
 ## Documentation
 
-- docs/ROADMAP.md
-- docs/ARCHITECTURE.md
-- docs/DECISIONS.md
-
-## Development
-
-The project follows:
-
-- Clean Architecture
-- DDD
-- TDD
-- Vue 3
-- Nuxt 4
-- Typescript
-- Tailwind CSS
-- Pinia
-- Vite
-- ESLint
-- Prettier
+- [Roadmap and sprint plan](docs/ROADMAP.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Architecture decisions](docs/DECISIONS.md)
 
 ## Project Status
 
-Current Version: v1
+- Version: v1
+- Current epic: Strategy Intelligence & Adaptation
+- Latest completed sprint: Sprint 40 — Adaptive Strategy Selection
+- Next sprint: Sprint 41 — Adaptive Weights
 
-Current Epic:
-Strategy Intelligence & Adaptation
+Sprint 40 is complete: the adaptive selector and evaluator are integrated into the predictions API and covered by tests. The roadmap contains the detailed plan for Sprints 41–48.
 
-Current Sprint:
-Task 40 Adaptive Strategy Selection
+## Technology and Practices
 
-Status:
-Completed
+- Nuxt 4, Vue 3, TypeScript
+- Clean Architecture, DDD, TDD
+- Vitest, ESLint, Prettier
+- CSV repositories for local data storage
+
+## Development
+
+```sh
+npm install
+npm run dev
+```
+
+Common commands:
+
+```sh
+npm run lint
+npm run typecheck
+npm test
+npm run build
+```
+
+The current implementation focuses on server APIs and domain logic. A complete user interface has not been implemented yet; it is planned as a separate epic after the APIs are stable.
