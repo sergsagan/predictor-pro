@@ -11,21 +11,30 @@ export type CsvDrawRepositoryOptions = Readonly<{
 export function createCsvDrawRepository(
   options: CsvDrawRepositoryOptions
 ): DrawRepository {
+  const findAll = async () => {
+    const csv = await readFile(options.filePath, 'utf8')
+    const rows = csv.trim().split(/\r?\n/)
+
+    return rows.slice(1).map(parseRow)
+  }
+
   return {
-    async findAll() {
-      const csv = await readFile(options.filePath, 'utf8')
-
-      const rows = csv.trim().split(/\r?\n/)
-
-      return rows.slice(1).map(parseRow)
-    },
+    findAll,
 
     async findLatest() {
-      throw new Error('Not implemented')
+      const draws = await findAll()
+
+      return draws.reduce<(typeof draws)[number] | null>(
+        (latest, draw) =>
+          latest === null || draw.drawDate > latest.drawDate ? draw : latest,
+        null
+      )
     },
 
-    async findByDate(_drawDate: string) {
-      throw new Error('Not implemented')
+    async findByDate(drawDate: string) {
+      const draws = await findAll()
+
+      return draws.find((draw) => draw.drawDate === drawDate) ?? null
     }
   }
 }
