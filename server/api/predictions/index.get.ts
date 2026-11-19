@@ -1,7 +1,6 @@
 import { defineEventHandler } from 'h3'
 
 import { DefaultPredictionService } from '@server/application/prediction/DefaultPredictionService'
-
 import { DefaultGenerateRecommendations } from '@server/application/recommendation/DefaultGenerateRecommendations'
 
 import { createStatisticsEngine } from '@server/domain/engines/statistics/DefaultStatisticsEngine'
@@ -18,10 +17,19 @@ import { SimpleNumberExplanationEngine } from '@server/domain/engines/explanatio
 
 import { createCsvDrawRepository } from '@server/domain/repositories/draws/CsvDrawRepository'
 
+import { SimpleBacktestingEngine } from '@server/domain/engines/backtesting/SimpleBacktestingEngine'
+import { WeightOptimizationEvaluator } from '@server/domain/engines/optimization/weights/WeightOptimizationEvaluator'
+import { evaluateAdaptiveWeightProfiles } from '@server/domain/engines/optimization/weights/AdaptiveWeightEvaluation'
+import { selectAdaptiveWeightProfile } from '@server/domain/engines/optimization/weights/AdaptiveWeightSelector'
+
+import type { RecommendationWeights } from '@server/domain/engines/recommendation/config/RecommendationWeights'
+
 export default defineEventHandler(async () => {
   const repository = createCsvDrawRepository({
     filePath: 'data/draws.csv'
   })
+
+  const draws = await repository.findAll()
 
   const performanceRepository = createCsvStrategyPerformanceRepository({
     filePath: 'data/strategy-performance.csv'
@@ -31,25 +39,43 @@ export default defineEventHandler(async () => {
     performanceRepository
   )
 
-  const evaluator = new DefaultStrategyPerformanceEvaluator()
+  const strategyEvaluator = new DefaultStrategyPerformanceEvaluator()
 
-  const selector = new DefaultAdaptiveStrategySelector(
+  const strategySelector = new DefaultAdaptiveStrategySelector(
     historyService,
-    evaluator
+    strategyEvaluator
   )
 
-  const selection = await selector.execute()
+  const selection = await strategySelector.execute()
 
   const statisticsEngine = createStatisticsEngine()
 
+  let weights: RecommendationWeights = {
+    frequency: 1,
+    currentGap: 1,
+    pairScore: 1
+  }
+
+  if (selection.strategy === 'simple') {
+    const weightEvaluator = new WeightOptimizationEvaluator((config) => {
+      const recommendationEngine = createRecommendationEngine(config)
+
+      return new SimpleBacktestingEngine(statisticsEngine, recommendationEngine)
+    })
+
+    const optimizationResults = evaluateAdaptiveWeightProfiles(
+      weightEvaluator,
+      draws
+    )
+
+    weights = selectAdaptiveWeightProfile(optimizationResults)
+  }
+
   const recommendationEngine = createRecommendationEngine({
     strategy: selection.strategy,
-    weights: {
-      frequency: 1,
-      currentGap: 1,
-      pairScore: 1
-    }
+    weights
   })
+
   const numberAnalysisEngine = new SimpleNumberAnalysisEngine()
   const numberExplanationEngine = new SimpleNumberExplanationEngine()
 
@@ -63,8 +89,6 @@ export default defineEventHandler(async () => {
   const predictionService = new DefaultPredictionService(
     generateRecommendations
   )
-
-  const draws = await repository.findAll()
 
   return predictionService.execute(draws)
 })
