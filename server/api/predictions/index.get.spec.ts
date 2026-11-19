@@ -143,7 +143,20 @@ describe('GET /api/predictions', () => {
 
     expect(findAllMock).toHaveBeenCalledOnce()
     expect(executeMock).toHaveBeenCalledWith(sampleDraws)
-    expect(response).toEqual(result)
+
+    expect(response).toEqual({
+      ...result,
+      adaptation: {
+        strategy: 'simple',
+        strategyReason: 'no-history',
+        weights: {
+          frequency: 1,
+          currentGap: 1,
+          pairScore: 1
+        },
+        weightReason: 'no-results'
+      }
+    })
   })
 
   it('returns generated predictions', async () => {
@@ -163,7 +176,19 @@ describe('GET /api/predictions', () => {
 
     const response = await handler({} as H3Event)
 
-    expect(response).toEqual(result)
+    expect(response).toEqual({
+      ...result,
+      adaptation: {
+        strategy: 'simple',
+        strategyReason: 'no-history',
+        weights: {
+          frequency: 1,
+          currentGap: 1,
+          pairScore: 1
+        },
+        weightReason: 'no-results'
+      }
+    })
   })
 
   it('propagates repository errors', async () => {
@@ -233,7 +258,6 @@ describe('GET /api/predictions', () => {
     const response = await handler({} as H3Event)
 
     expect(selectStrategyMock).toHaveBeenCalledOnce()
-
     expect(evaluateAllMock).not.toHaveBeenCalled()
 
     expect(createRecommendationEngineMock).toHaveBeenCalledWith({
@@ -245,7 +269,19 @@ describe('GET /api/predictions', () => {
       }
     })
 
-    expect(response).toEqual(result)
+    expect(response).toEqual({
+      ...result,
+      adaptation: {
+        strategy: 'gap-focused',
+        strategyReason: 'higher-hit-rate',
+        weights: {
+          frequency: 1,
+          currentGap: 1,
+          pairScore: 1
+        },
+        weightReason: 'not-applicable'
+      }
+    })
   })
 
   it('uses the best adaptive weight profile for the selected simple strategy', async () => {
@@ -288,9 +324,25 @@ describe('GET /api/predictions', () => {
 
     expect(createRecommendationEngineMock).toHaveBeenLastCalledWith({
       strategy: 'simple',
-      weights: optimizedWeights
+      weights: {
+        frequency: 1,
+        currentGap: 0.5,
+        pairScore: 0.5
+      }
     })
 
-    expect(response).toEqual(result)
+    expect(response).toEqual({
+      ...result,
+      adaptation: {
+        strategy: 'simple',
+        strategyReason: 'no-history',
+        weights: {
+          frequency: 1,
+          currentGap: 0.5,
+          pairScore: 0.5
+        },
+        weightReason: 'highest-hit-rate'
+      }
+    })
   })
 })

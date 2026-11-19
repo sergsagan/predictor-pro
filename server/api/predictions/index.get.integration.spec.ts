@@ -5,6 +5,8 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
 import type { H3Event } from 'h3'
+import type { RecommendationStrategyConfig } from '@server/domain/engines/recommendation/config/RecommendationStrategyConfig'
+import type { RecommendationWeights } from '@server/domain/engines/recommendation/config/RecommendationWeights'
 
 describe('GET /api/predictions - integration', () => {
   let directory: string
@@ -141,6 +143,17 @@ describe('GET /api/predictions - integration', () => {
         pairScore: 1
       }
     })
+
+    expect(response.adaptation).toEqual({
+      strategy: 'gap-focused',
+      strategyReason: 'higher-hit-rate',
+      weights: {
+        frequency: 1,
+        currentGap: 1,
+        pairScore: 1
+      },
+      weightReason: 'not-applicable'
+    })
   })
 
   it('uses Simple when performance history is empty', async () => {
@@ -173,14 +186,17 @@ describe('GET /api/predictions - integration', () => {
 
     expect(response.recommendations).toHaveLength(5)
 
-    expect(createRecommendationEngineMock).toHaveBeenCalledWith({
-      strategy: 'simple',
-      weights: {
-        frequency: 1,
-        currentGap: 1,
-        pairScore: 1
-      }
+    expect(createRecommendationEngineMock).toHaveBeenCalled()
+
+    const finalConfig = createRecommendationEngineMock.mock.lastCall?.[0]
+
+    expect(finalConfig).toMatchObject({
+      strategy: 'simple'
     })
+
+    expect(response.adaptation.strategy).toBe('simple')
+    expect(response.adaptation.strategyReason).toBe('no-history')
+    expect(response.adaptation.weights).toEqual(finalConfig?.weights)
   })
 
   it('generates predictions from real dependencies', async () => {
@@ -243,5 +259,68 @@ describe('GET /api/predictions - integration', () => {
         )
       ).toBe(true)
     }
+  })
+
+  it('returns adaptation metadata matching the weights applied to recommendations', async () => {
+    const recommendationConfigs: RecommendationStrategyConfig[] = []
+
+    vi.doMock(
+      '@server/domain/engines/recommendation/createRecommendationEngine',
+      async (importOriginal) => {
+        const actual =
+          await importOriginal<
+            typeof import('@server/domain/engines/recommendation/createRecommendationEngine')
+          >()
+
+        return {
+          ...actual,
+          createRecommendationEngine: (
+            config: Parameters<typeof actual.createRecommendationEngine>[0]
+          ) => {
+            recommendationConfigs.push(config)
+
+            return actual.createRecommendationEngine(config)
+          }
+        }
+      }
+    )
+
+    const { default: handler } = await import('./index.get')
+
+    const response = await handler({} as H3Event)
+
+    const appliedConfig = recommendationConfigs.at(-1)
+
+    expect(appliedConfig).toBeDefined()
+    expect(appliedConfig?.strategy).toBe('simple')
+
+    expect(recommendationConfigs).toHaveLength(9)
+
+    const adaptation = response.adaptation
+
+    expect(adaptation).toBeDefined()
+
+    expect(adaptation).toMatchObject({
+      strategy: 'simple',
+      strategyReason: 'no-history',
+      weights: appliedConfig?.weights,
+      weightReason: expect.stringMatching(
+        /^(highest-hit-rate|insufficient-sample|no-results|invalid-profile)$/
+      )
+    })
+
+    const weights: RecommendationWeights = adaptation.weights
+
+    expect(
+      Math.max(weights.frequency, weights.currentGap, weights.pairScore)
+    ).toBe(1)
+
+    expect(
+      [weights.frequency, weights.currentGap, weights.pairScore].every(
+        (weight) => weight > 0 && weight <= 1
+      )
+    ).toBe(true)
+
+    expect(response.recommendations).toHaveLength(5)
   })
 })

@@ -55,7 +55,11 @@ describe('selectAdaptiveWeightProfile', () => {
 
     const selected = selectAdaptiveWeightProfile(results)
 
-    expect(selected).toEqual(frequencyFocusedWeights)
+    expect(selected).toEqual({
+      frequency: 1,
+      currentGap: 0.5,
+      pairScore: 0.5
+    })
   })
 
   it('returns default weights when no optimization results exist', () => {
@@ -91,6 +95,10 @@ describe('selectAdaptiveWeightProfile', () => {
 
     const selected = selectAdaptiveWeightProfile(results)
 
-    expect(selected).toEqual(frequencyFocusedWeights)
+    expect(selected).toEqual({
+      frequency: 1,
+      currentGap: 0.5,
+      pairScore: 0.5
+    })
   })
 })

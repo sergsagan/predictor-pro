@@ -19,10 +19,15 @@ import { createCsvDrawRepository } from '@server/domain/repositories/draws/CsvDr
 
 import { SimpleBacktestingEngine } from '@server/domain/engines/backtesting/SimpleBacktestingEngine'
 import { WeightOptimizationEvaluator } from '@server/domain/engines/optimization/weights/WeightOptimizationEvaluator'
-import { evaluateAdaptiveWeightProfiles } from '@server/domain/engines/optimization/weights/AdaptiveWeightEvaluation'
-import { selectAdaptiveWeightProfile } from '@server/domain/engines/optimization/weights/AdaptiveWeightSelector'
 
-import type { RecommendationWeights } from '@server/domain/engines/recommendation/config/RecommendationWeights'
+import { evaluateAdaptiveWeightProfiles } from '@server/domain/engines/optimization/weights/AdaptiveWeightEvaluation'
+
+import {
+  DEFAULT_ADAPTIVE_WEIGHTS,
+  selectAdaptiveWeightProfileWithReason
+} from '@server/domain/engines/optimization/weights/AdaptiveWeightSelector'
+
+import type { AdaptiveWeightSelectionReason } from '@server/domain/engines/optimization/weights/AdaptiveWeightSelector'
 
 export default defineEventHandler(async () => {
   const repository = createCsvDrawRepository({
@@ -50,11 +55,8 @@ export default defineEventHandler(async () => {
 
   const statisticsEngine = createStatisticsEngine()
 
-  let weights: RecommendationWeights = {
-    frequency: 1,
-    currentGap: 1,
-    pairScore: 1
-  }
+  let weights = DEFAULT_ADAPTIVE_WEIGHTS
+  let weightReason: AdaptiveWeightSelectionReason = 'not-applicable'
 
   if (selection.strategy === 'simple') {
     const weightEvaluator = new WeightOptimizationEvaluator((config) => {
@@ -68,7 +70,11 @@ export default defineEventHandler(async () => {
       draws
     )
 
-    weights = selectAdaptiveWeightProfile(optimizationResults)
+    const weightSelection =
+      selectAdaptiveWeightProfileWithReason(optimizationResults)
+
+    weights = weightSelection.weights
+    weightReason = weightSelection.reason
   }
 
   const recommendationEngine = createRecommendationEngine({
@@ -90,5 +96,15 @@ export default defineEventHandler(async () => {
     generateRecommendations
   )
 
-  return predictionService.execute(draws)
+  const predictionResult = predictionService.execute(draws)
+
+  return {
+    ...predictionResult,
+    adaptation: {
+      strategy: selection.strategy,
+      strategyReason: selection.reason,
+      weights,
+      weightReason
+    }
+  }
 })
