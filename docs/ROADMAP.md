@@ -8,10 +8,14 @@ The service analyzes historical lottery draws, generates recommendations with ex
 
 - Current version: v1
 - Current epic: Strategy Intelligence & Adaptation
-- Latest completed sprint: Sprint 40 — Adaptive Strategy Selection
-- Next sprint: Sprint 41 — Adaptive Weights
+- Latest completed sprint: Sprint 41 — Adaptive Weights
+- Next sprint: Sprint 42 — Prediction analytics API
 
-Sprints 1–39 are complete, as recorded in the history below. Sprint 40 is implemented: the selector reads strategy performance history, falls back to the simple strategy when no history exists, and passes the latest snapshot to the evaluator. The predictions API integration and tests are in place.
+Sprints 1–41 are complete, as recorded in the history below. Sprint 40 is implemented: the selector reads strategy performance history, falls back to the simple strategy when no history exists, and passes the latest snapshot to the evaluator. The predictions API integration and tests are in place.
+Sprint 40 selects a recommendation strategy from persisted performance history.
+Sprint 41 evaluates weight profiles for the selected simple strategy using
+walk-forward backtesting, applies the best eligible profile, and returns
+adaptation metadata with prediction results.
 
 ### EPIC 1 — Statistics Engine
 
@@ -82,10 +86,17 @@ Sprints 1–39 are complete, as recorded in the history below. Sprint 40 is impl
 
 - [x] Sprint 39 — Strategy performance history
 - [x] Sprint 40 — Adaptive strategy selection
-- [ ] Sprint 41 — Adaptive weights
+- [x] Sprint 41 — Adaptive weights
   - **Goal:** Use evaluation results to choose recommendation weights under clear constraints.
-  - **Scope:** Define the evaluation metric and time window; implement a domain service for weight adaptation; set weight bounds and behavior for small or missing samples; pass selected weights to the next prediction; include the applied weights and selection reason in the prediction result.
-  - **Acceptance criteria:** Identical inputs produce identical weights; weights are always valid and normalized according to the chosen rule; documented defaults apply when data is insufficient; evaluation does not use future draws; unit and integration tests cover the behavior.
+  - **Evaluation:** Hit rate (`hitRate`) measured through walk-forward backtesting on available historical draws. Each backtest prediction uses only draws preceding its target draw.
+  - **Profiles:** Eight configurations generated from frequency, currentGap, and pairScore values `[1, 2]`, for the `simple` strategy.
+  - **Selection:** Choose the profile with the highest hit rate. Ties retain the first profile in catalog order.
+  - **Minimum sample:** At least 30 predictions are required for a profile to be eligible.
+  - **Fallback:** Use default weights `{ frequency: 1, currentGap: 1, pairScore: 1 }` when results are missing, insufficient, or invalid.
+  - **Normalization:** Divide each selected weight by the maximum weight. This preserves relative proportions and ensures the maximum component equals 1.
+  - **Strategy compatibility:** Weight optimization is skipped for `gap-focused`, whose number ranking does not depend on configurable weights.
+  - **API metadata:** Prediction responses include the selected strategy, strategy reason, applied weights, and weight selection reason.
+  - **Acceptance criteria:** Selection is deterministic; weights are finite and positive; insufficient samples use documented defaults; backtesting does not use future draws; unit and integration tests cover the workflow.
   - **Dependencies:** Sprints 39 and 40.
 
 ### EPIC 11 — Prediction Analytics

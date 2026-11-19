@@ -12,10 +12,21 @@ The service analyzes historical lottery draws, generates number recommendations 
 
 - Version: v1
 - Current epic: Strategy Intelligence & Adaptation
-- Latest completed sprint: Sprint 40 — Adaptive Strategy Selection
-- Next sprint: Sprint 41 — Adaptive Weights
+- Latest completed sprint: Sprint 41 — Adaptive Weights
+- Next sprint: Sprint 42 — Prediction analytics API
 
-Sprint 40 is complete: the adaptive selector and evaluator are integrated into the predictions API and covered by tests. The roadmap contains the detailed plan for Sprints 41–48.
+Sprint 40 implements adaptive recommendation strategy selection from persisted
+performance history.
+
+Sprint 41 adds adaptive weight selection for the simple strategy using
+walk-forward backtesting. It evaluates eight candidate profiles, requires
+a minimum sample of 30 predictions, normalizes selected weights, and falls
+back to default weights when results are unavailable or insufficient.
+
+The predictions API returns adaptation metadata containing the selected
+strategy, strategy selection reason, applied weights, and weight selection
+reason. Weight optimization is skipped for the gap-focused strategy because
+its ranking does not depend on configurable weights.
 
 ## Technology and Practices
 
