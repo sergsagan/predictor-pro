@@ -2,16 +2,16 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type { H3Event } from 'h3'
 
-import type { Draw } from '@server/domain/models/Draw'
-import type { RecommendationStrategyConfig } from '@server/domain/engines/recommendation/config/RecommendationStrategyConfig'
-import type { RecommendationWeights } from '@server/domain/engines/recommendation/config/RecommendationWeights'
-import type { WeightOptimizationResult } from '@server/domain/engines/optimization/weights/WeightOptimizationResult'
+import type { Draw } from '../../domain/models/Draw'
+import type { RecommendationStrategyConfig } from '../../domain/engines/recommendation/config/RecommendationStrategyConfig'
+import type { RecommendationWeights } from '../../domain/engines/recommendation/config/RecommendationWeights'
+import type { WeightOptimizationResult } from '../../domain/engines/optimization/weights/WeightOptimizationResult'
 
-import { sampleDraws } from '@test/fixtures/sampleDraws'
+import { sampleDraws } from '../../test/fixtures/sampleDraws'
 import { sampleNumberAnalysis } from '../../test/fixtures/sampleNumberAnalysis'
 import { sampleNumberExplanation } from '../../test/fixtures/sampleNumberExplanation'
 
-import { createDefaultWeightProfiles } from '@server/domain/engines/optimization/weights/DefaultWeightProfileCatalog'
+import { createDefaultWeightProfiles } from '../../domain/engines/optimization/weights/DefaultWeightProfileCatalog'
 
 const findAllMock = vi.fn()
 const executeMock = vi.fn()

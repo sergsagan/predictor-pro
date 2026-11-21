@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import type { Draw } from '@server/domain/models/Draw'
+import type { Draw } from '../../../models/Draw'
 import type { RecommendationStrategyConfig } from '../../recommendation/config/RecommendationStrategyConfig'
 import type { WeightOptimizationResult } from './WeightOptimizationResult'
 
